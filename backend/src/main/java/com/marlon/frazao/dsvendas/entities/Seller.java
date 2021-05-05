@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.marlon.frazao.dsvendas.dto.SellerDTO;
+
 @Entity
 @Table(name = "tb_sellers")
 public class Seller implements Serializable {
@@ -76,5 +78,9 @@ public class Seller implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public SellerDTO convert() {
+		return new SellerDTO(this);
 	}
 }
