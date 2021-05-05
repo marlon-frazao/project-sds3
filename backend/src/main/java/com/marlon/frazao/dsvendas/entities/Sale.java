@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.marlon.frazao.dsvendas.dto.SaleDTO;
+
 @Entity
 @Table(name = "tb_sales")
 public class Sale implements Serializable {
@@ -112,5 +114,9 @@ public class Sale implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public SaleDTO toDTO() {
+		return new SaleDTO(this);
 	}
 }

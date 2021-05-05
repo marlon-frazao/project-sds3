@@ -16,6 +16,6 @@ public class SellerService {
 	private SellerRepository repository;
 	
 	public List<SellerDTO> findAll() {
-		return repository.findAll().stream().map(x -> x.convert()).collect(Collectors.toList());
+		return repository.findAll().stream().map(x -> x.toDTO()).collect(Collectors.toList());
 	}
 }

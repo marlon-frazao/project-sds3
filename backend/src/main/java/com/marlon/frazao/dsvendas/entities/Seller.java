@@ -80,7 +80,7 @@ public class Seller implements Serializable {
 		return true;
 	}
 	
-	public SellerDTO convert() {
+	public SellerDTO toDTO() {
 		return new SellerDTO(this);
 	}
 }
