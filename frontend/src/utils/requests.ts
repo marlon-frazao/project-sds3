@@ -1,1 +1,1 @@
-export const BASE_URL = process.env.REACT_APP_DSVENDAS_BACKEND_URL;
+export const BASE_URL = 'https://sds3-marlon.herokuapp.com';
