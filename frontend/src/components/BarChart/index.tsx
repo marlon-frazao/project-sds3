@@ -4,6 +4,7 @@ import Chart from 'react-apexcharts';
 import { SaleSuccess } from 'types/sale';
 import { round } from 'utils/format';
 import { BASE_URL } from 'utils/requests';
+import BarChartLoader from '../BarChartLoader';
 
 type SeriesData = {
     name: string;
@@ -17,6 +18,7 @@ type ChartData = {
 }
 const BarChart = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
     const [chartData, setChartData] = useState<ChartData>({
         labels: {
             categories: []
@@ -30,6 +32,7 @@ const BarChart = () => {
     });
 
     useEffect(() => {
+        setIsLoading(true);
         axios.get(`${BASE_URL}/sales/success-by-seller`)
             .then(response => {
                 const data = response.data as SaleSuccess[];
@@ -47,6 +50,9 @@ const BarChart = () => {
                         }
                     ]
                 });
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }, []);
 
@@ -59,12 +65,14 @@ const BarChart = () => {
     };
 
     return (
-        <Chart
-            options={{ ...options, xaxis: chartData.labels }}
-            series={chartData.series}
-            type="bar"
-            height="240"
-        />
+        <>
+            {isLoading ? <BarChartLoader /> : <Chart
+                options={{ ...options, xaxis: chartData.labels }}
+                series={chartData.series}
+                type="bar"
+                height="240"
+            />}
+        </>
     );
 }
 
